@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  addressDb:
+    image: kartoza/postgis
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_DBNAME=capitalChurch
+      - POSTGRES_USER=address
+      - POSTGRES_PASS=@Qualidade2#!
+    ports:
+      - "5432:5432"
