@@ -70,7 +70,7 @@ namespace CapitalChurch.Address.IntegrationTests.Learning
             var cartesianDistanceCampusNorth = epnbCampus.Distance(northCampus);
             var cartesianDistanceCampusSouth = epnbCampus.Distance(southCampus);
             
-            cartesianDistanceCampusNorth.ShouldBeGreaterThan(cartesianDistanceCampusSouth);
+            cartesianDistanceCampusSouth.ShouldBeGreaterThan(cartesianDistanceCampusNorth);
             
             //result makes no sense, because is cartesian and not geographic(lat, lng)
         }
