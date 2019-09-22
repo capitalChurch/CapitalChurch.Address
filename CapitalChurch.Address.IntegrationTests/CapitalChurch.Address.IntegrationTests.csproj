@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CapitalChurch.Shared" Version="0.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
+        <PackageReference Include="nunit" Version="3.11.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+        <PackageReference Include="Shouldly" Version="3.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="UnitTest1.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CapitalChurch.Address.Data\CapitalChurch.Address.Data.csproj" />
+      <ProjectReference Include="..\CapitalChurch.Address.Shared.Contracts\CapitalChurch.Address.Shared.Contracts.csproj" />
+      <ProjectReference Include="..\CapitalChurch.Address.Shared\CapitalChurch.Address.Shared.csproj" />
+      <ProjectReference Include="..\CapitalChurch.Address.WebApi\CapitalChurch.Address.WebApi.csproj" />
+    </ItemGroup>
+
+</Project>

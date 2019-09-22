@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  addressapi:
+    image: address
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionString=Host=addressDb;Port=5432;Username=address;Password=@Qualidade2#!;Database=capitalChurch;
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - addressDb
+    ports:
+      - "8082:80"
+  addressDb:
+    image: kartoza/postgis
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_DBNAME=capitalChurch
+      - POSTGRES_USER=address
+      - POSTGRES_PASS=@Qualidade2#!
+    ports:
+      - "5432:5432"
