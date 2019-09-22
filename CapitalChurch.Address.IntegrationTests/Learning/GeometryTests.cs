@@ -1,6 +1,6 @@
 using System.Linq;
 using CapitalChurch.Address.Data;
-using CapitalChurch.Address.Shared;
+using CapitalChurch.Address.IntegrationTests.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
@@ -8,19 +8,15 @@ using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using Shouldly;
 
-namespace CapitalChurch.Address.LearningTests
+namespace CapitalChurch.Address.IntegrationTests.Learning
 {
-    public class GeometryTests
+    public class GeometryTests : BaseTests
     {        
         private readonly AddressContext _target;
         
         public GeometryTests()
         {
-            var builder = new DbContextOptionsBuilder<AddressContext>();
-
-            builder.UseNpgsql(DatabaseConstants.ConnectionString, o => o.UseNetTopologySuite(geographyAsDefault: true));
-            
-            this._target = new AddressContext(builder.Options);
+            _target = GetService<AddressContext>();
         }
 
 

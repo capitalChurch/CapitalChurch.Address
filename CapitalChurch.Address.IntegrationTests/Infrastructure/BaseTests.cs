@@ -1,8 +1,10 @@
 using System;
-using CapitalChurch.Address.Data;
 using CapitalChurch.Address.Shared;
-using Microsoft.EntityFrameworkCore;
+using CapitalChurch.Address.Shared.Contracts;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Moq;
 using NUnit.Framework;
 
 namespace CapitalChurch.Address.IntegrationTests.Infrastructure
@@ -11,18 +13,23 @@ namespace CapitalChurch.Address.IntegrationTests.Infrastructure
     public class BaseTests
     {
         private readonly ServiceProvider _serviceProvider;
+
+        private readonly string DefaultConnection =
+            "Host=localhost;Port=5432;Username=address;Password=@Qualidade2#!;Database=capitalChurch;";
         
         protected BaseTests()
         {
-            var services = AllProviders.All;
-            services.AddTransient<AddressContext>(_ =>
-            {
-                var builder = new DbContextOptionsBuilder<AddressContext>();
-                builder.UseNpgsql(DatabaseConstants.ConnectionString, o => o.UseNetTopologySuite());
-                return new AddressContext(builder.Options);
-            });
+            var configurationSection = new Mock<IConfigurationSection>();
+            configurationSection.SetupGet(x => x[It.Is<string>(s => s == EnvironmentConstants.AddressConnectionString)])
+                .Returns(DefaultConnection);
 
-            _serviceProvider = services.BuildServiceProvider();
+            var configuration = new Mock<IConfiguration>();
+            configuration.Setup(a => a.GetSection(It.Is<string>(s => s == EnvironmentConstants.ConnectionStrings)))
+                .Returns(configurationSection.Object);
+
+            var services = new AddressProviders(configuration.Object);
+            
+            _serviceProvider = new ServiceCollection().Add(services).BuildServiceProvider();
         }
 
         protected TResult GetService<TResult>() where TResult : class

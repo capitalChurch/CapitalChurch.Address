@@ -1,13 +1,9 @@
-﻿using System;
-using AutoMapper;
-using CapitalChurch.Address.Data;
-using CapitalChurch.Address.Shared;
+﻿using CapitalChurch.Address.Shared;
 using CapitalChurch.Address.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -35,10 +31,6 @@ namespace CapitalChurch.Address.WebApi
                 .AddJsonOptions(opts => opts.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
-            services.AddDbContext<AddressContext>(opts =>
-                opts.UseNpgsql(_configuration["ConnectionString"], builder =>
-                    builder.UseNetTopologySuite()));
-
             services
                 .AddCors(opts =>
                     opts.AddPolicy(corsPolicy, builder => builder
@@ -52,9 +44,7 @@ namespace CapitalChurch.Address.WebApi
                 opts.SubstituteApiVersionInUrl = true;
             });
 
-            services.AddAutoMapper(typeof(Startup));
-
-            services.Add(AllProviders.All);
+            services.Add(new AddressProviders(_configuration));
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
         }
