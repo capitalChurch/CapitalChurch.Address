@@ -13,7 +13,6 @@ services:
       - addressDb
     ports:
       - "8082:80"
-    container_name: address_services
   addressDb:
     image: kartoza/postgis
     build:
