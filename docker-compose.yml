@@ -13,6 +13,11 @@ services:
       - addressDb
     ports:
       - "8082:80"
+  addressapitests:
+    image: addresstests
+    build:
+      context: ./
+      dockerfile: tests.DockerFile
   addressDb:
     image: kartoza/postgis
     build:
