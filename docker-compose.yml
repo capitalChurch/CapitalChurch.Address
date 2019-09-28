@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 
 services:
   addressapi:
@@ -17,15 +17,17 @@ services:
     image: addresstests
     build:
       context: ./
-      dockerfile: tests.DockerFile
+      dockerfile: tests.Dockerfile
+    depends_on:
+      - addressDb
   addressDb:
-    image: kartoza/postgis
+    image: mdillon/postgis
     build:
       context: ./database
       dockerfile: Dockerfile
     environment:
-      - POSTGRES_DBNAME=capitalChurch
+      - POSTGRES_DB=capitalChurch
       - POSTGRES_USER=address
-      - POSTGRES_PASS=@Qualidade2#!
+      - POSTGRES_PASSWORD=@Qualidade2#!
     ports:
       - "5432:5432"

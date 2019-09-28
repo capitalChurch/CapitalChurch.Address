@@ -15,4 +15,3 @@ COPY ["CapitalChurch.Address.WebApi/CapitalChurch.Address.WebApi.csproj", "Capit
 RUN dotnet restore "./CapitalChurch.Address.IntegrationTests/CapitalChurch.Address.IntegrationTests.csproj"
 COPY . .
 WORKDIR /src
-RUN dotnet test "./CapitalChurch.Address.IntegrationTests/CapitalChurch.Address.IntegrationTests.csproj" 
