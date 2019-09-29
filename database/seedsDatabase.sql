@@ -19,3 +19,4 @@ create table addresses.address(
 
 insert into addresses.address(postalCode, number, complement, referencePlace, addressLine, neighborhood, city, state, country, lat, long)
   values (71735720, '09/10', 'Lote', null, 'ADE Conjunto 2', 'SMPW', 'Nucleo Bandeirante', 'Distrito Federal', 'Brasil', -15.8674807,-48.0310518);
+

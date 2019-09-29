@@ -15,7 +15,7 @@ namespace CapitalChurch.Address.IntegrationTests.Infrastructure
         private readonly ServiceProvider _serviceProvider;
 
         private readonly string DefaultConnection =
-            "Host=localhost;Port=5432;Username=address;Password=@Qualidade2#!;Database=capitalChurch;";
+            "Host=localhost;Port=5432;Username=address;Password=12345678;Database=capitalChurch;";
         
         protected BaseTests()
         {

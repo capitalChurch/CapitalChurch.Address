@@ -13,13 +13,7 @@ services:
       - addressDb
     ports:
       - "8082:80"
-  addressapitests:
-    image: addresstests
-    build:
-      context: ./
-      dockerfile: tests.Dockerfile
-    depends_on:
-      - addressDb
+
   addressDb:
     image: mdillon/postgis
     build:
@@ -28,6 +22,6 @@ services:
     environment:
       - POSTGRES_DB=capitalChurch
       - POSTGRES_USER=address
-      - POSTGRES_PASSWORD=@Qualidade2#!
+      - POSTGRES_PASSWORD=12345678
     ports:
       - "5432:5432"
