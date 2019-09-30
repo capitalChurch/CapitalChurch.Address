@@ -17,15 +17,13 @@ To run this project you will need
 
 After source code cloned; To start project on you machine, just follow these steps
 
-Run project and database
-
 Setup database
 
 ```
 docker-compose -f./database/docker-compose.yml up --build -d
 ```
 
-After that you can try connect to local database created by docker
+After that you can try connect to Postgres local database created by docker
 
 With:
 * User - address
@@ -46,9 +44,7 @@ dotnet run --project ./CapitalChurch.Address.WebApi
 
 And See endpoints on your browser
 
-* [Result Success](http://localhost:5000/swagger)
-
-End with an example of getting some data out of the system or using it for a little demo
+* [Result Success](http://localhost:5000/swagger) - http://localhost:5000/swagger
 
 ## Running the tests
 
@@ -58,6 +54,7 @@ Running tests
 dotnet test ./CapitalChurch.Address.IntegrationTests
 ```
 
+<!--
 ### Break down into end to end tests
 
 Explain what these tests test and why
@@ -74,6 +71,7 @@ Explain what these tests test and why
 Give an example
 ```
 
+-->
 ## Deployment
 
 Deployment occurs automatic when publish to Quality Branch(Quality environment) and Master Branch(Production environment)
