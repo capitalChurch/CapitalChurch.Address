@@ -1,11 +1,11 @@
 using System;
 using CapitalChurch.Address.Shared;
-using CapitalChurch.Address.Shared.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 using NUnit.Framework;
+using static CapitalChurch.Address.Shared.Contracts.EnvironmentConstants;
 
 namespace CapitalChurch.Address.IntegrationTests.Infrastructure
 {
@@ -19,12 +19,15 @@ namespace CapitalChurch.Address.IntegrationTests.Infrastructure
         
         protected BaseTests()
         {
+            var connectionFromEnvironmentVariable =
+                Environment.GetEnvironmentVariable($"{ConnectionStrings}__{AddressConnectionString}");
+                
             var configurationSection = new Mock<IConfigurationSection>();
-            configurationSection.SetupGet(x => x[It.Is<string>(s => s == EnvironmentConstants.AddressConnectionString)])
-                .Returns(DefaultConnection);
+            configurationSection.SetupGet(x => x[It.Is<string>(s => s == AddressConnectionString)])
+                .Returns(connectionFromEnvironmentVariable ?? DefaultConnection);
 
             var configuration = new Mock<IConfiguration>();
-            configuration.Setup(a => a.GetSection(It.Is<string>(s => s == EnvironmentConstants.ConnectionStrings)))
+            configuration.Setup(a => a.GetSection(It.Is<string>(s => s == ConnectionStrings)))
                 .Returns(configurationSection.Object);
 
             var services = new AddressProviders(configuration.Object);
