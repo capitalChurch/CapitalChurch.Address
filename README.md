@@ -1,40 +1,62 @@
 # Address - Capital Church
 
-In this microservice you will find 
+In this is the endpoints for addresses information
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This is a .net core project with swagger. To see the endpoints just [open](http://capitalchurch-address-qa.sa-east-1.elasticbeanstalk.com/swagger) swagger
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To run this project you will need
 
-```
-Give examples
-```
+* [Docker](https://www.docker.com/) - To simulate production environment
+* [Dotnet](https://dotnet.microsoft.com/) - To run C# source code
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+After source code cloned; To start project on you machine, just follow these steps
 
-Say what the step will be
+Run project and database
 
-```
-Give the example
-```
-
-And repeat
+Setup database
 
 ```
-until finished
+docker-compose -f./database/docker-compose.yml up --build -d
 ```
+
+After that you can try connect to local database created by docker
+
+With:
+* User - address
+* Password - 12345678
+* Database - capitalChurch
+* Host - Localhost
+* Port - 5455
+
+```
+psql "postgresql://address:12345678@localhost:5455/capitalChurch"
+```
+
+Running project
+
+```
+dotnet run --project ./CapitalChurch.Address.WebApi
+```
+
+And See endpoints on your browser
+
+* [Result Success](http://localhost:5000/swagger)
 
 End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Running tests
+
+```
+dotnet test ./CapitalChurch.Address.IntegrationTests
+```
 
 ### Break down into end to end tests
 
@@ -54,14 +76,17 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Deployment occurs automatic when publish to Quality Branch(Quality environment) and Master Branch(Production environment)
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Dotnet](https://dotnet.microsoft.com/) - The web framework used
+* [Swagger](https://swagger.io/) - Endpoint discovery
+* [Postgres](https://www.postgresql.org/) - Used to store data
+* [Postgis](https://postgis.net/) - Used to measure distances
+* [Docker](https://www.docker.com/) - To help setup environments
 
+<!--
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -85,4 +110,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
-
+-->
