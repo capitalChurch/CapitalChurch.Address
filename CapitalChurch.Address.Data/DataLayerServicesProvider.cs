@@ -22,7 +22,7 @@ namespace CapitalChurch.Address.Data
             var services = new ServiceCollection();
 
             services.AddDbContext<AddressContext>(opts =>
-                opts.UseNpgsql(_configuration.GetConnectionString(EnvironmentConstants.AddressConnectionString), builder =>
+                opts.UseNpgsql(_configuration[EnvironmentConstants.ConnectionStrings], builder =>
                     builder.UseNetTopologySuite()));
             
             services.AddTransient<IAddressRepository, AddressRepository>();

@@ -1,4 +1,6 @@
-﻿using CapitalChurch.Address.Shared;
+﻿using System.Threading.Tasks;
+using CapitalChurch.Address.Shared;
+using CapitalChurch.Address.Shared.Contracts;
 using CapitalChurch.Address.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,8 +21,11 @@ namespace CapitalChurch.Address.WebApi
         private readonly IConfiguration _configuration;
         private const string corsPolicy = "AllowAnythingForGet";
 
-        public Startup(IConfiguration configuration)
+        private readonly ILogger<Startup> _logger;
+        
+        public Startup(ILogger<Startup> logger, IConfiguration configuration)
         {
+            _logger = logger;
             _configuration = configuration;
         }
         
@@ -44,6 +49,8 @@ namespace CapitalChurch.Address.WebApi
                 opts.SubstituteApiVersionInUrl = true;
             });
 
+            _logger.LogInformation($"Connection String configured: {_configuration[EnvironmentConstants.ConnectionStrings]} ");
+
             services.Add(new AddressProviders(_configuration));
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
@@ -62,8 +69,14 @@ namespace CapitalChurch.Address.WebApi
                     opts.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
                         description.GroupName.ToUpperInvariant());
             });
-
+            
             app.UseMvc();
+
+            app.Run(context =>
+            {
+                context.Response.Redirect("/swagger");
+                return Task.CompletedTask;
+            });
         }
     }
 }

@@ -3,16 +3,17 @@ version: '2.1'
 services:
   addressapi:
     image: address
+    container_name: addressapi
     build:
       context: ./
       dockerfile: Dockerfile
     environment:
-      - ConnectionString=Host=addressDb;Port=5432;Username=address;Password=@Qualidade2#!;Database=capitalChurch;
+      - ConnectionString=Host=addressDb;Port=5432;Username=address;Password=12345678;Database=capitalChurch;
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
       - addressDb
     ports:
-      - "8082:80"
+      - "8085:80"
 
   addressDb:
     image: mdillon/postgis
@@ -24,4 +25,4 @@ services:
       - POSTGRES_USER=address
       - POSTGRES_PASSWORD=12345678
     ports:
-      - "5432:5432"
+      - "5455:5432"
