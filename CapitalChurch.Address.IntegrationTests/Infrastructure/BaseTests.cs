@@ -20,15 +20,11 @@ namespace CapitalChurch.Address.IntegrationTests.Infrastructure
         protected BaseTests()
         {
             var connectionFromEnvironmentVariable =
-                Environment.GetEnvironmentVariable($"{ConnectionStrings}__{AddressConnectionString}");
-                
-            var configurationSection = new Mock<IConfigurationSection>();
-            configurationSection.SetupGet(x => x[It.Is<string>(s => s == AddressConnectionString)])
-                .Returns(connectionFromEnvironmentVariable ?? DefaultConnection);
+                Environment.GetEnvironmentVariable(ConnectionStrings);
 
             var configuration = new Mock<IConfiguration>();
-            configuration.Setup(a => a.GetSection(It.Is<string>(s => s == ConnectionStrings)))
-                .Returns(configurationSection.Object);
+            configuration.Setup(a => a[It.Is<string>(x => x == ConnectionStrings)])
+                .Returns(connectionFromEnvironmentVariable ?? DefaultConnection);
 
             var services = new AddressProviders(configuration.Object);
             

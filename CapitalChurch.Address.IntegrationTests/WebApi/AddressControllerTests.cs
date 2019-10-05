@@ -23,7 +23,7 @@ namespace CapitalChurch.Address.IntegrationTests.WebApi
                 PostalCode = 72001800,
             };
 
-            var result = await base._client.Post<HasIdViewModel>(url, address);
+            var result = await base._client.Post<HasIdTestModel>(url, address);
 
             result.Id.ShouldBePositive();
         }

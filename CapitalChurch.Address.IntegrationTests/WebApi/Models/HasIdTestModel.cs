@@ -1,6 +1,6 @@
 namespace CapitalChurch.Address.IntegrationTests.WebApi.Models
 {
-    public class HasIdViewModel
+    public class HasIdTestModel
     {
         public int Id { get; set; }
     }
