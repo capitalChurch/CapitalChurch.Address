@@ -17,6 +17,7 @@ services:
 
   addressDb:
     image: mdillon/postgis
+    container_name: addressdb
     build:
       context: ./database
       dockerfile: Dockerfile
