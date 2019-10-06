@@ -27,7 +27,7 @@ namespace CapitalChurch.Address.WebApi.Infrastructure
                 Title = "Capital Church - Address api",
                 Version = description.ApiVersion.ToString(),
                 Description = "A application to list and manage all the address registered on Capital Church Databases",
-                Contact = new Contact() { Name = "Kevyn Klava", Email = "kevynsax@gmail.com" },
+                Contact = new Contact() { Name = "Kevyn Pinheiro Klava", Email = "kevynsax@gmail.com" },
                 TermsOfService = "Shareware",
                 License = new License() { Name = "MIT", Url = "https://opensource.org/licenses/MIT" },
             };
