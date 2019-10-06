@@ -20,12 +20,10 @@ namespace CapitalChurch.Address.WebApi
     {
         private readonly IConfiguration _configuration;
         private const string corsPolicy = "AllowAnythingForGet";
-
-        private readonly ILogger<Startup> _logger;
+        private const string urlBase = "/endereco";
         
-        public Startup(ILogger<Startup> logger, IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
-            _logger = logger;
             _configuration = configuration;
         }
         
@@ -49,8 +47,6 @@ namespace CapitalChurch.Address.WebApi
                 opts.SubstituteApiVersionInUrl = true;
             });
 
-            _logger.LogInformation($"Connection String configured: {_configuration[EnvironmentConstants.ConnectionStrings]} ");
-
             services.Add(new AddressProviders(_configuration));
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
@@ -62,21 +58,17 @@ namespace CapitalChurch.Address.WebApi
                 app.UseDeveloperExceptionPage();
 
             app.UseCors(corsPolicy);
-            app.UseSwagger();
+            app.UsePathBase(urlBase).UseSwagger(opts =>
+                opts.PreSerializeFilters.Add((doc, _) => doc.BasePath = urlBase));
+
             app.UseSwaggerUI(opts =>
             {
                 foreach (var description in provider.ApiVersionDescriptions)
-                    opts.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                    opts.SwaggerEndpoint($"{urlBase}/swagger/{description.GroupName}/swagger.json",
                         description.GroupName.ToUpperInvariant());
             });
             
-            app.UseMvc();
-
-            app.Run(context =>
-            {
-                context.Response.Redirect("/swagger");
-                return Task.CompletedTask;
-            });
+            app.UsePathBase(urlBase).UseMvc();
         }
     }
 }
