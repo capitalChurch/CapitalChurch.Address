@@ -10,8 +10,7 @@
       "applicationUrl": "http://localhost:8084",
       "launchUrl": "http://localhost:8084/endereco/swagger/",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionString": "Host=localhost;Port=5455;Username=address;Password=12345678;Database=capitalChurch;"        
+        "ASPNETCORE_ENVIRONMENT": "Development"      
       }
     }
   }
