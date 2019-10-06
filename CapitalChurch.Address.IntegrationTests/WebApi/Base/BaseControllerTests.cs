@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using NUnit.Framework;
 
@@ -10,7 +11,9 @@ namespace CapitalChurch.Address.IntegrationTests.WebApi.Base
         [OneTimeSetUp]
         public void SetupTests()
         {
-            _client = new AddressFixture().CreateClient();
+            var client = new AddressFixture().CreateClient();
+            client.BaseAddress = new Uri($"{client.BaseAddress}endereco/");
+            _client = client;
         }
     }
 }
