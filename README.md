@@ -2,9 +2,9 @@
 
 In this is the endpoints for addresses information
 
-## Getting Started
+## Overview
 
-This is a .net core project with swagger. To see the endpoints just [open](http://3eb26e7f-7d77-48d7-ae18-c21d166995ad.pub.cloud.scaleway.com:8084) swagger
+To see the endpoints just open [swagger page](http://3eb26e7f-7d77-48d7-ae18-c21d166995ad.pub.cloud.scaleway.com/endereco/swagger)  
 
 ### Prerequisites
 
@@ -39,7 +39,7 @@ dotnet test ./CapitalChurch.Address.IntegrationTests
 
 Deployment occurs automatic when publish to Development or Master branch
   
-* [Development branch](https://github.com/capitalChurch/CapitalChurch.Address/tree/development) => [Quality Environment](http://3eb26e7f-7d77-48d7-ae18-c21d166995ad.pub.cloud.scaleway.com:8084)
+* [Development branch](https://github.com/capitalChurch/CapitalChurch.Address/tree/development) => [Quality Environment](http://3eb26e7f-7d77-48d7-ae18-c21d166995ad.pub.cloud.scaleway.com/endereco/swagger)
 
 ## Built With
 
